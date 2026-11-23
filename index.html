@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es-PY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#19315e">
+  <title>Estación Mburicaó · Redes Industriales</title>
+  <link rel="stylesheet" href="sensia.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="sensia-portada.js" defer></script>
+  <script src="diagramas.js" defer></script>
+  <script src="desafio.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="registro.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#presentacion">Ir a la presentación</a>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="#inicio">
+        <span class="brand-symbol" aria-hidden="true">≋</span>
+        <span><strong>Mburicaó</strong><small>Redes Industriales</small></span>
+      </a>
+      <nav aria-label="Diapositivas" class="main-nav">
+        <a href="#inicio">Inicio</a><a href="#contexto">El desafío</a><a href="#sistema">Sistema</a>
+        <a href="#estacion">Estación</a><a href="#esquema">Esquema</a><a href="#montaje">Montaje</a><a href="#registro">Registro</a><a href="#visualizacion">Visualización</a>
+        <a href="#resultados">Resultados y Conclusiones</a>
+      </nav>
+      <img class="faculty" src="assets/fiuna.png" alt="Facultad de Ingeniería de la Universidad Nacional de Asunción">
+    </header>
+
+    <main id="presentacion" tabindex="-1">
+      <section class="slide" id="inicio" aria-labelledby="title">
+        <div class="wrap cover-wrap">
+          <div class="section-head cover-head">
+            <div><p class="eyebrow"><span class="dot"></span> Proyecto final de Redes Industriales</p>
+              <h1 id="title">Estación IoT para monitorear<br> <em>el nivel del Mburicaó</em></h1></div>
+            <p>Del radar al servidor y a la página de monitoreo. La microSD conserva la lectura aun si se interrumpe la comunicación.</p>
+          </div>
+          <figure class="unified-illustration">
+            <svg id="data-pipeline" role="img" aria-label="Ilustración original de SensIA. La estación sobre el arroyo envía datos al servidor y al dashboard, con salidas de gráficos, reportes, alertas y predicciones."></svg>
+          </figure>
+          <div class="cover-footer"><span>Mathias Aguilar · Mauricio Tullo · Sol Fernández · José Medina</span><a class="text-action" href="#contexto">Por qué medir el arroyo <span aria-hidden="true">→</span></a></div>
+        </div>
+      </section>
+
+<section class="slide" id="contexto" aria-labelledby="title-mburicao" hidden><div class="wrap">
+<div class="section-head"><div><span class="eyebrow">El desafío</span><h2 id="title-mburicao">Un cauce que atraviesa<br><em>vidas reales.</em></h2></div><p>Lluvias intensas, una ciudad impermeable<br>y comunidades expuestas a crecidas rápidas.</p></div>
+<div class="territory-layout"><svg id="flood-link" class="flood-link" aria-hidden="true"><defs><marker id="flood-arrowhead" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0968d6"/></marker></defs><path id="flood-link-line" marker-end="url(#flood-arrowhead)"/></svg><div class="map-block"><div class="map-topline"><span>MBURICAÓ · ASUNCIÓN</span><span class="map-label">Referencia histórica</span></div><div class="map-canvas"><img src="assets/mapa.webp" alt="Mapa histórico del Mburicaó con la zona crítica, cuatro puntos de inundación y estaciones del estudio"><svg class="map-stream" viewBox="0 0 865 865" aria-hidden="true"><path d="M205 690L167 651L142 595L119 550L108 512L126 459L158 415L163 356L147 310L132 260L97 203L83 149"/></svg><button class="map-point" style="--x:15;--y:28" data-point="0" aria-label="Ver inundación en punto 1">1</button><button class="map-point" style="--x:31.5;--y:49.6" data-point="1" aria-label="Ver inundación en punto 2">2</button><button class="map-point" style="--x:28;--y:56.3" data-point="2" aria-label="Ver inundación en punto 3">3</button><button class="map-point" style="--x:2.5;--y:67" data-point="3" aria-label="Ver inundación en punto 4">4</button></div><p class="caption">Las estaciones del mapa pertenecen al estudio histórico.<br>No representan la red actual.</p></div>
+<div class="territory-story"><div class="territory-metrics"><div><strong>+16 <small>km</small></strong><span>de recorrido urbano</span></div><div><strong>7</strong><span>barrios en su entorno</span></div></div><div class="flood-evidence"><div class="duotone flood-photo" id="flood-photo"></div><div class="flood-meta"><span class="tiny-label">IMPACTO EN EL TERRITORIO</span><h3 id="flood-title"></h3><p>Fotografías reales facilitadas por el equipo.</p><div class="photo-dots" aria-label="Elegir foto de inundación"></div></div></div><div class="cause-list"><div><span aria-hidden="true">▥</span><p><b>Infraestructura insuficiente</b><small>Una capacidad que necesita crecer.</small></p></div><div><span aria-hidden="true">≋</span><p><b>Lluvias extremas</b><small>El nivel puede cambiar con rapidez.</small></p></div><div><span aria-hidden="true">▦</span><p><b>Urbanización impermeable</b><small>Menos infiltración, más escorrentía.</small></p></div></div></div></div>
+</div></section>
+
+      <section class="slide" id="sistema" aria-labelledby="sistema-titulo" hidden>
+        <div class="wrap">
+          <div class="section-head">
+            <div><p class="eyebrow">Sistema</p><h2 id="sistema-titulo">Del radar al servidor<br><em>y a la página de monitoreo.</em></h2></div>
+            <p>La estación registra cada lectura en la microSD antes de transmitirla.</p>
+          </div>
+          <figure class="architecture-figure system-figure">
+            <svg id="flujo-redes" role="img" aria-label="El radar FM02B se conecta a la estación por RS-485. La estación envía datos al servidor por GPRS o WiFi. La secuencia termina en la página de monitoreo, que recibe su registro ampliado por WiFi desde la estación."></svg>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" id="estacion" aria-labelledby="estacion-titulo" hidden>
+        <div class="wrap">
+          <div class="section-head">
+            <div><p class="eyebrow">Estación</p><h2 id="estacion-titulo">Arquitectura <em>de la estación</em></h2></div>
+            <p>Dos transceptores RS-485 enlazan la PCB con el radar y el módem. La UPS entrega 5 V a la PCB y 12 V a los dos equipos externos.</p>
+          </div>
+          <figure class="architecture-figure station-figure">
+            <svg id="arquitectura-estacion" role="img" aria-label="PCB con ESP32-S3, reloj DS3231M con pila, microSD y dos transceptores RS-485 a TTL, uno para el radar y otro para el módem. La UPS alimenta la PCB a 5 V y el radar y el módem a 12 V."></svg>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" id="esquema" aria-labelledby="esquema-titulo" hidden>
+        <div class="wrap">
+          <div class="section-head">
+            <div><p class="eyebrow">Esquema</p><h2 id="esquema-titulo">Esquemas <em>electrónicos de la PCB</em></h2></div>
+            <p>Seis bloques de la presentación P3 final. Selecciona un esquema para ampliarlo.</p>
+          </div>
+          <div class="circuit-gallery">
+            <figure>
+              <button class="zoom" data-photo="assets/circuito-alimentacion.png" type="button"><img src="assets/circuito-alimentacion.png" alt="Esquemático de Alimentación"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>Alimentación</strong><small>Regulación a 3,3 V con AMS1117.</small></figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-photo="assets/circuito-esp32.png" type="button"><img src="assets/circuito-esp32.png" alt="Esquemático de ESP32-S3"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>ESP32-S3</strong><small>Microcontrolador, pulsadores e indicadores.</small></figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-photo="assets/circuito-rtc.png" type="button"><img src="assets/circuito-rtc.png" alt="Esquemático de Reloj DS3231M"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>Reloj DS3231M</strong><small>Fecha y hora mediante I²C.</small></figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-photo="assets/circuito-microsd.png" type="button"><img src="assets/circuito-microsd.png" alt="Esquemático de microSD"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>microSD</strong><small>Registro local mediante SPI.</small></figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-photo="assets/circuito-usbc.png" type="button"><img src="assets/circuito-usbc.png" alt="Esquemático de USB-C"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>USB-C</strong><small>Entrada de 5 V y conexión de datos.</small></figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-photo="assets/circuito-rs485.png" type="button"><img src="assets/circuito-rs485.png" alt="Esquemático de Transceptor TTL–RS-485"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>Transceptor TTL–RS-485</strong><small>Adaptación de UART al par diferencial A/B.</small></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="montaje" aria-labelledby="montaje-titulo" hidden>
+        <div class="wrap">
+          <div class="section-head">
+            <div><p class="eyebrow">Montaje</p><h2 id="montaje-titulo">De la PCB <em>al montaje en banco</em></h2></div>
+            <p>La placa, la bancada de pruebas y la estación integrada en el laboratorio.</p>
+          </div>
+          <div class="mount-gallery">
+            <figure>
+              <button class="zoom" data-photo="assets/placa.webp" type="button"><img src="assets/placa.webp" alt="PCB ensamblada, con conectores, portapila, microSD y ESP32-S3"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>PCB ensamblada</strong><small>Placa con sus componentes y conectores.</small></figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-photo="assets/banco.webp" type="button"><img src="assets/banco.webp" alt="Vista lateral del banco de pruebas con el radar alineado sobre el recipiente"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>Montaje de las pruebas</strong><small>Radar orientado hacia el agua en la bancada.</small></figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-photo="assets/estacion-laboratorio.webp" type="button"><img src="assets/estacion-laboratorio.webp" alt="Vista superior de la estación en laboratorio con la placa, la alimentación y el radar montado"><span aria-hidden="true">↗</span></button>
+              <figcaption><strong>Montaje de la estación</strong><small>Vista superior del conjunto integrado en el laboratorio.</small></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="registro" aria-labelledby="registro-titulo" hidden>
+        <div class="wrap">
+          <div class="section-head registro-head">
+            <div><p class="eyebrow">Registro</p><h2 id="registro-titulo">Cómo se registran <em>las lecturas</em></h2></div>
+            <p>Prueba una lectura normal, una falla del sensor o un corte de internet. Las mediciones avanzan en intervalos de cinco minutos.</p>
+          </div>
+          <div class="registro-layout">
+            <div class="registro-controls">
+              <button type="button" id="cambiar-red" class="registro-switch" aria-pressed="false">
+                <span class="registro-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M3 8.5a14 14 0 0 1 18 0M6.5 12a8.5 8.5 0 0 1 11 0M10 15.5a3 3 0 0 1 4 0"/>
+                    <circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/>
+                    <path class="icon-slash" d="m3 3 18 18"/>
+                  </svg>
+                </span>
+                <span class="switch-copy"><strong>Internet</strong><span id="accion-red">Cortar conexión</span></span>
+                <span id="estado-red" class="switch-state">Activo</span>
+              </button>
+              <button type="button" id="cambiar-sensor" class="registro-switch" aria-pressed="false">
+                <span class="registro-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+                    <path d="M8 7V4h8v3M8 15.5a6 6 0 0 0 8 0M5.5 18a10 10 0 0 0 13 0"/>
+                    <rect x="4" y="7" width="16" height="5.5" rx="2"/>
+                    <path class="icon-slash" d="m3 3 18 18"/>
+                  </svg>
+                </span>
+                <span class="switch-copy"><strong>Radar</strong><span id="accion-sensor">Simular falla</span></span>
+                <span id="estado-sensor" class="switch-state">Operativo</span>
+              </button>
+              <div class="registro-actions">
+                <button type="button" id="medir" class="button registro-capture">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2"/>
+                    <path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22"/>
+                  </svg>
+                  Tomar lectura
+                </button>
+                <button type="button" id="reiniciar" class="registro-reset" title="Reiniciar simulación" aria-label="Reiniciar simulación">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 10a8 8 0 1 1 1.3 6.4M4 5v5h5"/>
+                  </svg>
+                </button>
+              </div>
+              <button type="button" id="simular-crecida" class="button outline">Simular crecida completa <span aria-hidden="true">↗</span></button>
+              <dl class="registro-counts" aria-label="Estado de la microSD">
+                <div><dt>Guardadas en microSD</dt><dd id="guardadas">1</dd></div>
+                <div><dt>Pendientes de envío</dt><dd id="pendientes">0</dd></div>
+              </dl>
+            </div>
+            <div class="server-preview">
+              <div class="preview-transport">
+                <svg id="flujo-registro" data-flow="direct" role="img" aria-label="La estación guarda cada lectura en su microSD interna. Si hay conexión la envía al servidor. Tras un corte, reenvía las lecturas pendientes."></svg>
+                <p id="registro-mensaje" role="status">Cada lectura se guarda primero en la microSD.</p>
+              </div>
+              <div class="server-table" tabindex="0" role="region" aria-label="Tabla de registros del servidor">
+                <table>
+                  <caption><strong>Servidor · Tabla Masi</strong><span>Simulación</span></caption>
+                  <thead><tr><th scope="col">id</th><th scope="col">timestamp</th><th scope="col">nivel</th><th scope="col">created_at</th><th scope="col">estado</th></tr></thead>
+                  <tbody id="registro-filas"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <dl class="registro-legend">
+            <div><dt class="status-code status-ok">OK</dt><dd>Lectura válida recibida a tiempo.</dd></div>
+            <div><dt class="status-code status-falla">FALLA_SENSOR</dt><dd>El sensor no entregó una lectura válida.</dd></div>
+            <div><dt class="status-code status-recuperado">RECUPERADO</dt><dd>Lectura válida recibida con más de 120 s de retraso.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="slide" id="visualizacion" aria-labelledby="visualizacion-titulo" hidden>
+        <div class="wrap">
+          <div class="section-head visualization-head">
+            <div><p class="eyebrow">Visualización</p><h2 id="visualizacion-titulo">Del registro <em>a la pantalla</em></h2></div>
+            <p>El monitoreo del Mburicaó muestra cómo evoluciona el nivel del arroyo. La tabla del servidor muestra las lecturas recibidas.</p>
+          </div>
+          <div id="visual-real">
+            <div class="visualization-gallery">
+              <figure class="visualization-card">
+                <button class="zoom" type="button" data-photo="assets/visualizacion-mburicao.webp"><img src="assets/visualizacion-mburicao.webp" alt="Panel de Monitoreo Mburicaó con nivel medido, pronóstico y lluvia durante la crecida del 3 de octubre de 2026"><span aria-hidden="true">↗</span></button>
+                <figcaption><div><h3>Monitoreo Mburicaó</h3><p>Crecida del 3 de octubre de 2026.</p></div>
+                  <a class="text-action" href="https://mburicaocastai.github.io/v1/" target="_blank" rel="noopener noreferrer">Abrir monitoreo <span aria-hidden="true">↗</span></a>
+                </figcaption>
+              </figure>
+              <figure class="visualization-card">
+                <button class="zoom" type="button" data-photo="assets/visualizacion-servidor-completa.webp"><img src="assets/visualizacion-servidor.webp" alt="Tabla Masi del servidor con las columnas id, timestamp, nivel, created_at y estado"><span aria-hidden="true">↗</span></button>
+                <figcaption><div><h3>Servidor · Tabla Masi</h3><p>Lecturas recibidas con sus horas de medición e inserción.</p></div></figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="resultados" aria-labelledby="resultados-titulo" hidden>
+        <div class="wrap">
+          <div class="section-head outcomes-head">
+            <div><p class="eyebrow">Pruebas de laboratorio</p><h2 id="resultados-titulo">Resultados <em>y Conclusiones</em></h2></div>
+            <p>Los ensayos verificaron la adquisición, el registro local y la recuperación de lecturas tras un corte de internet.</p>
+          </div>
+          <div class="outcomes-grid">
+            <figure class="outcome-card">
+              <figcaption><h3>Operación continua</h3><p>17 h 50 min en banco, con una medición cada 5 min.</p></figcaption>
+              <svg id="resultado-continuidad" role="img" aria-label="La estación adquirió 215 lecturas, la web publicó 213 y las otras dos quedaron registradas en microSD."></svg>
+            </figure>
+            <figure class="outcome-card">
+              <figcaption><h3>Recuperación de un corte de internet</h3><p>El servidor recibió las 7 lecturas que quedaron pendientes.</p></figcaption>
+              <svg id="resultado-corte" role="img" aria-label="Durante el corte de internet se acumularon siete lecturas en microSD. Al volver la conexión se recuperaron las siete y la cola se vació en 96 segundos."></svg>
+              <p class="fine outcome-note">En un ensayo aparte, el servidor confirmó un envío por GPRS en <strong>3,9 s</strong>.</p>
+            </figure>
+          </div>
+          <div class="outcomes-summary">
+            <div class="conclusion">
+              <h3>Conclusión</h3>
+              <p>El prototipo midió, guardó y transmitió las lecturas en banco. Antes de probar el radar en el arroyo, queda comprobar la exactitud sobre agua y repetir los cortes de red y energía.</p>
+            </div>
+            <figure class="deployment">
+              <figcaption>
+                <h3>2 estaciones en funcionamiento</h3>
+                <p>SIL y MASI usan el hardware desarrollado.</p>
+              </figcaption>
+              <svg id="estaciones-operativas" role="img" aria-label="Estaciones SIL y MASI en funcionamiento con el hardware desarrollado."></svg>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <footer class="site-footer">
+      <button type="button" class="page-prev" id="anterior"><span aria-hidden="true">←</span> <span id="anterior-nombre">Anterior</span></button>
+      <div class="pagination">
+        <span id="counter" aria-live="polite"></span><progress id="progress" max="9" value="1" aria-label="Avance de la presentación"></progress>
+        <button type="button" id="pantalla" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button>
+      </div>
+      <button type="button" class="page-next" id="siguiente"><span id="siguiente-nombre">Siguiente</span> <span aria-hidden="true">→</span></button>
+    </footer>
+  </div>
+  <dialog id="foto" aria-label="Fotografía ampliada">
+    <button type="button" class="photo-close" aria-label="Cerrar fotografía">×</button><img alt="">
+  </dialog>
+</body>
+</html>
+
+
+
+
